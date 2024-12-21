@@ -1,7 +1,7 @@
 import { UserTable } from "@/database/schemas";
-import { IUser } from "@/types/index";
 import { eq } from "drizzle-orm";
 import { BaseModel } from "./BaseModel";
+import { IUser } from "@/types/index";
 
 export class UserModel extends BaseModel {
   static async getUserByEmail(email: string) {
@@ -16,6 +16,20 @@ export class UserModel extends BaseModel {
       })
       .from(UserTable)
       .where(eq(UserTable.email, email));
+  }
+
+  static async getUserById(id: string) {
+    return await UserModel.db()
+      .select({
+        id: UserTable.id,
+        username: UserTable.username,
+        email: UserTable.email,
+        fullName: UserTable.fullName,
+        createdAt: UserTable.createdAt,
+        updatedAt: UserTable.updatedAt,
+      })
+      .from(UserTable)
+      .where(eq(UserTable.id, id));
   }
 
   static async getUserByUsername(username: string) {
