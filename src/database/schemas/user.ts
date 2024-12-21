@@ -7,5 +7,5 @@ export const UserTable = pgTable("user", {
   password: varchar({ length: 255 }).notNull(),
   fullName: varchar("full_name", { length: 255 }).notNull(),
   createdAt: timestamp().defaultNow().notNull(),
-  updatedAt: timestamp(),
+  updatedAt: timestamp().$type<Date>(),
 });

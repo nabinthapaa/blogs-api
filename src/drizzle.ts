@@ -9,7 +9,11 @@ export default defineConfig({
   schema: path.resolve(__dirname, "./database/schemas/index.ts"),
   out: path.resolve(__dirname, "./database/migrations/"),
   dbCredentials: {
-    url: `postgres://${user}:${password}@${host}:${port}/${database}`,
+    host,
+    port: +port,
+    user,
+    password,
+    database,
   },
   strict: true,
   verbose: true,

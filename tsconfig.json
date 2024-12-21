@@ -4,14 +4,16 @@
     "module": "CommonJS",
     "target": "ES6",
     "baseUrl": ".",
+    "strictNullChecks": true,
     "paths": {
       "@/controllers/*": ["src/controllers/*"],
       "@/models/*": ["src/modals/*"],
       "@/routes/*": ["src/routes/*"],
-      "@/schemas/*": ["src/sections/*"],
+      "@/validationSchema/*": ["src/validationSchema/*"],
       "@/middlewares/*": ["src/middlewares/*"],
       "@/services/*": ["src/services/*"],
-      "@/types/*": ["src/types/*"]
+      "@/types/*": ["src/types/*"],
+      "@/database/*": ["src/database/*"]
     }
   }
 }
