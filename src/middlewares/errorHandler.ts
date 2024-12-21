@@ -4,11 +4,13 @@ import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
 export function routeNotFound(
-  _req: Request,
+  req: Request,
   res: Response,
 ): Response<Record<string, string>> {
   return res.status(StatusCodes.NOT_FOUND).json({
     message: "Route not found",
+    method: req.method,
+    route: req.url,
   });
 }
 

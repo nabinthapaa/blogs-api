@@ -6,7 +6,7 @@
     "baseUrl": ".",
     "strictNullChecks": true,
     "paths": {
-      "@/controllers/*": ["src/controllers/*"],
+      "@/controller/*": ["src/controller/*"],
       "@/models/*": ["src/modals/*"],
       "@/routes/*": ["src/routes/*"],
       "@/validationSchema/*": ["src/validationSchema/*"],

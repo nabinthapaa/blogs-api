@@ -26,3 +26,7 @@ export async function getUserByEmail(email: string) {
 export async function getUserByUsername(username: string) {
   return await UserModel.getUserByUsername(username);
 }
+
+export async function getUserById(id: string) {
+  return await UserModel.getUserById(id);
+}
