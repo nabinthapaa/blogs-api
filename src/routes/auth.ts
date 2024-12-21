@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login } from "@/controller/auth";
+import { login, register } from "@/controller/auth";
 import { asyncHandler } from "src/utils/asyncHandler";
 import { validateRequestBody } from "@/middlewares/validator";
 import { userSchema } from "@/validationSchema/user";
@@ -12,8 +12,10 @@ router.post(
   asyncHandler(login),
 );
 
-router.post("/users/register", (req, res) => {
-  console.log({ res, req });
-});
+router.post(
+  "/users/register",
+  validateRequestBody(userSchema),
+  asyncHandler(register),
+);
 
 export default router;

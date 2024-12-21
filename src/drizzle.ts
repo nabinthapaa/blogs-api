@@ -14,6 +14,7 @@ export default defineConfig({
     user,
     password,
     database,
+    ssl: false,
   },
   strict: true,
   verbose: true,

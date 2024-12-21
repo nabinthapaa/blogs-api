@@ -6,14 +6,15 @@ const { host, port, user, password, name: database } = config.database;
 
 export class BaseModel {
   protected static queryClient = postgres({
-    host,
     password,
     port: +port,
     user,
     database,
+    max: 1,
+    hostname: host,
   });
 
   protected static db() {
-    return drizzle(this.queryClient);
+    return drizzle(BaseModel.queryClient, { logger: true });
   }
 }

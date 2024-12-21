@@ -21,6 +21,7 @@ export function genericErrorHandler(
   _next: NextFunction,
 ): Response<Record<string, string>> {
   if (error.stack) {
+    console.log(error.message, error.name);
     console.error(error.stack);
   }
 

@@ -3,6 +3,8 @@ services:
     build: .
     container_name: blogs-api
     env_file: ".env"
+    environment:
+      DB_HOST: database
     ports:
       - ${PORT}:${PORT}
     command: >
@@ -21,9 +23,9 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_blog:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - 5432:5432
     restart: always
 volumes:
-  postgres_data:
+  postgres_blog:
