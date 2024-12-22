@@ -1,6 +1,5 @@
 import { IUser } from "@/types/index";
 import { IAuthResponse } from "@/types/interface";
-import { userSchema } from "@/validationSchema/user";
 import bcrypt from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import config from "src/config";
@@ -42,7 +41,7 @@ export async function register(data: IUser): Promise<IAuthResponse> {
   const userWithEmail = await UserService.getUserByEmail(data.email);
   if (userWithEmail) throw new UserExistsError("Email already in use");
 
-  const hashPassword = await bcrypt.hash(data.password, 20);
+  const hashPassword = await bcrypt.hash(data.password, 10);
 
   const newUser = await UserService.createUser({
     ...data,

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import AuthRouter from "./auth";
 import { StatusCodes } from "http-status-codes";
+import BlogRouter from "./blog";
 
 const router = Router();
 
@@ -11,5 +12,6 @@ router.get("/checkhealth", (req, res) => {
 });
 
 router.use(AuthRouter);
+router.use("/posts", BlogRouter);
 
 export default router;

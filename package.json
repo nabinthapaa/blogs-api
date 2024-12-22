@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
     "drizzle": "drizzle-kit --config ./src/drizzle.ts",
+    "studio": "drizzle-kit studio --config ./src/drizzle.ts",
     "make:migrations": "npm run drizzle generate",
     "drop:migrations": "npm run drizzle drop",
     "migrate": "npm run drizzle migrate"
