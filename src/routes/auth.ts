@@ -7,13 +7,13 @@ import { userSchema } from "@/validationSchema/user";
 const router = Router();
 
 router.post(
-  "/users/login",
+  "/login",
   validateRequestBody(userSchema.pick({ username: true, password: true })),
   asyncHandler(login),
 );
 
 router.post(
-  "/users/register",
+  "/register",
   validateRequestBody(userSchema),
   asyncHandler(register),
 );

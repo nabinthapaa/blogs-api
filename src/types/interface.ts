@@ -2,6 +2,12 @@ import { Request as ExpressRequest } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { IUser } from ".";
 
+export interface IUserWithId extends Omit<IUser, "password"> {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date | null;
+}
+
 export interface CustomRequest<
   P = ParamsDictionary,
   ResBody = any,
@@ -9,15 +15,11 @@ export interface CustomRequest<
   ReqQuery = qs.ParsedQs,
   Locals extends Record<string, any> = Record<string, any>,
 > extends ExpressRequest<P, ResBody, ReqBody, ReqQuery, Locals> {
-  user?: Omit<IUser, "password">;
+  user?: IUserWithId;
 }
 
 export interface IAuthResponse {
   accessToken: string;
   refreshToken: string;
-  user: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date | null;
-  } & Omit<IUser, "password">;
+  user: IUserWithId;
 }

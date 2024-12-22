@@ -6,5 +6,8 @@ export interface IUser extends z.infer<typeof userSchema> {}
 export interface IBlog extends z.infer<typeof blogSchema> {}
 
 export interface IBlogDB extends IBlog {
+  id: string;
   slug: string;
+  createdAt: Date;
+  updatedAt: Date | null;
 }

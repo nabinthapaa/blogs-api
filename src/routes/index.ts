@@ -11,7 +11,7 @@ router.get("/checkhealth", (req, res) => {
   });
 });
 
-router.use(AuthRouter);
+router.use("/users", AuthRouter);
 router.use("/posts", BlogRouter);
 
 export default router;

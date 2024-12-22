@@ -21,7 +21,7 @@ export async function register(
   res: Response,
 ) {
   const userInfo = await AuthService.register(req.body);
-  return res.status(StatusCodes.OK).json({
+  return res.status(StatusCodes.CREATED).json({
     ...userInfo,
   });
 }

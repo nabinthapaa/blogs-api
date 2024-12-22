@@ -1,10 +1,12 @@
 import { BlogTable, UserTable } from "@/database/schemas";
 import { eq } from "drizzle-orm";
-import { IBlogDB } from "../types";
+import { IBlog, IBlogDB } from "../types";
 import { BaseModel } from "./BaseModel";
 
+type IPostToWrite = IBlog & { slug: string };
+
 export class BlogModel extends BaseModel {
-  static async createPost(data: IBlogDB) {
+  static async createPost(data: IPostToWrite) {
     return (
       (
         await BlogModel.db()
@@ -15,6 +17,7 @@ export class BlogModel extends BaseModel {
             title: BlogTable.title,
             content: BlogTable.content,
             author: BlogTable.author,
+            slug: BlogTable.slug,
             createdAt: BlogTable.createdAt,
             updatedAt: BlogTable.updatedAt,
           })
@@ -31,6 +34,7 @@ export class BlogModel extends BaseModel {
             title: BlogTable.title,
             content: BlogTable.content,
             author: BlogTable.author,
+            slug: BlogTable.slug,
             createdAt: BlogTable.createdAt,
             updatedAt: BlogTable.updatedAt,
           })
@@ -47,6 +51,7 @@ export class BlogModel extends BaseModel {
         title: BlogTable.title,
         content: BlogTable.content,
         author: BlogTable.author,
+        slug: BlogTable.slug,
         createdAt: BlogTable.createdAt,
         updatedAt: BlogTable.updatedAt,
       })
@@ -54,7 +59,7 @@ export class BlogModel extends BaseModel {
       .where(eq(BlogTable.author, authorId));
   }
 
-  static async updateBlog(id: string, data: Partial<IBlogDB>) {
+  static async updateBlog(id: string, data: Partial<IPostToWrite>) {
     return (
       (
         await BlogModel.db()
@@ -65,6 +70,7 @@ export class BlogModel extends BaseModel {
             id: BlogTable.id,
             title: BlogTable.title,
             content: BlogTable.content,
+            slug: BlogTable.slug,
             author: BlogTable.author,
             createdAt: BlogTable.createdAt,
             updatedAt: BlogTable.updatedAt,

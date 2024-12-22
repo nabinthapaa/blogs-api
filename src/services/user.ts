@@ -1,5 +1,4 @@
 import { IUser } from "@/types/index";
-import { userSchema } from "@/validationSchema/user";
 import { UserModel } from "src/models/user";
 import { NotFoundError, UserExistsError } from "../errors";
 

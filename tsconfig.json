@@ -7,14 +7,15 @@
     "strictNullChecks": true,
     "paths": {
       "@/controller/*": ["src/controller/*"],
-      "@/models/*": ["src/modals/*"],
+      "@/models/*": ["src/models/*"],
       "@/routes/*": ["src/routes/*"],
       "@/validationSchema/*": ["src/validationSchema/*"],
       "@/middlewares/*": ["src/middlewares/*"],
       "@/services/*": ["src/services/*"],
       "@/types/*": ["src/types/*"],
       "@/database/*": ["src/database/*"],
-      "@/errors/*": ["src/errors/*"]
+      "@/errors/*": ["src/errors/*"],
+      "@/utils/*": ["src/utils/*"]
     }
   }
 }

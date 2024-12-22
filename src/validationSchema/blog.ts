@@ -11,6 +11,5 @@ export const blogSchema = z
     author: z
       .string({ message: "Post author cannot be empty" })
       .uuid({ message: "Cannot pasrse post author" }),
-    slug: z.string().optional().nullable(),
   })
   .strip();
