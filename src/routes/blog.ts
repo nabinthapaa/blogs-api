@@ -20,8 +20,12 @@ BlogRouter.get(
 
 BlogRouter.post(
   "/",
+  (req, res, next) => {
+    console.log(req.body);
+    next();
+  },
   authenticate,
-  validateRequestBody(blogSchema),
+  validateRequestBody(blogSchema.omit({ author: true })),
   asyncHandler(createPost),
 );
 

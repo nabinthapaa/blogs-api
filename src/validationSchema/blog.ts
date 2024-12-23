@@ -5,7 +5,7 @@ export const blogSchema = z
     title: z
       .string({ message: "Post title must be provided" })
       .min(10, { message: "Post title must be at least 10 characters long" }),
-    content: string({ message: "Post content must be provided" }).min(50, {
+    content: string({ message: "Post content must be provided" }).min(10, {
       message: "Blog content must be at least 50 characters long",
     }),
     author: z
