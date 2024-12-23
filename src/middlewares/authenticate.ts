@@ -1,4 +1,4 @@
-import { InvalidStrategy } from "@/errors/InvalidStrategy";
+import { InvalidStrategy } from "@/errors/index";
 import { CustomRequest, IUserWithId } from "@/types/interface";
 import { NextFunction, Response } from "express";
 import { verify } from "jsonwebtoken";
@@ -13,7 +13,9 @@ export function authenticate() {
     try {
       const { token } = req.headers;
       if (typeof token === "string") {
-        verify(token, config.jwt.secret, (error, data) => {
+        const verificationToken = token.split(" ");
+        if (verificationToken[0] !== "JWT") throw new InvalidStrategy();
+        verify(verificationToken[1], config.jwt.secret, (error, data) => {
           if (error) {
             next(error);
           } else {
