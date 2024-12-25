@@ -1,144 +1,112 @@
-> ⚠️ **Warning: AI Usage Policy**  
-> Using any AI tools or assistance during this coding test is strictly prohibited.  
-> 🚫 **Violation of this policy will result in automatic disqualification.**  
-> **Focus on demonstrating your skills and problem-solving abilities.**
+# Introduction
 
-# Task List for Backend Developer
+This project is a api service for creating blogs
 
-As a Backend Developer, you will be responsible for designing, implementing, and maintaining the backend infrastructure of our blogging platform. The following tasks outline the key functionalities and features you need to develop. Each task includes detailed requirements to ensure clarity and comprehensive coverage.
+## Setup
 
----
+### Requirements
 
-## Tech Stack
+- Node v23.5.0
+- Docker 27.3.1
 
-The task should be implemented using one of the following technologies:
-- **Backend Frameworks/Languages:** PHP 8.3+ or Node.js 22.11+
-  - Recommended frameworks: Laravel 11.x (PHP) or NestJS 10.x (Node.js).
-- **Database:** PostgreSQL 17.2.x or MySQL 8.4.x.
-- **Containerization:** Docker 27.x for environment consistency and deployment.
+### Running Locally
 
-### Preferred Approach:
-Developers who choose to implement the tasks using **Core PHP** (without a framework) and **PostgreSQL** will receive special consideration, as this demonstrates deeper understanding and adaptability. However, you are free to select any of the listed technologies based on your expertise and comfort level. Ensure adherence to best practices for the chosen stack.
+- Clone the repository
+- create a `.env` file at the root of directory
+  - env file format is specified in `.env.example`
+- Switch to repository and run docker compose up
+- Server will be running at `http://localhost:4000/`
+- To check is server is running visit `http://localhost:4000/api/health`
+- Optional
+  - If nvm is installed, run `nvm use` to switch node version
+  - To check database(node version must be 23), run `npm run studio`, visit `http://local.drizzle.studio`
 
----
+## Features
 
-### 1. **Initialize Super Admin User**
-- Create a script or migration to seed a default super admin user with credentials.
-- Use a basic password hashing method (e.g., bcrypt).
+- User Authentication
+  - User can register and login
+  - Access token and refresh token are generated for authentication
+  - Password is hashed using bcrypt
+- Blogs
+  - User can create blogs
+  - Blog can be retrieve by its id
+  - All blogs created by user can be retrieved
+- Images
+  - User can upload a feature image for created blog
+  - User can update the created blog
+  - User can delete the image of a blog
+- User Profile
+  - User can retrieve their information
+  - User can update their profile information
 
-**Acceptance Criteria:**
-- The super admin user is seeded with pre-defined credentials.
-- Password is securely hashed.
+## API Routes
 
----
+- User Authentication
 
-### 2. **User Registration and Login**
-- Implement a basic user registration endpoint that stores a username and hashed password.
-- Create a login endpoint to validate user credentials and return a token.
+  - `POST: /api/users/register`
 
-**Possible Routes:**
-- `POST /api/users/register`
-- `POST /api/users/login`
+    - Schema
 
-**Stretch Goal:** Include input validation for username and password.
+      ```json
+      {
+        "username": "username",
+        "password": "password",
+        "email": "email",
+        "fullName": "fullName"
+      }
+      ```
 
-**Acceptance Criteria:**
-- Users can register and log in successfully.
-- Tokens are generated upon login.
+  - `POST: /api/users/login`
 
----
+    - Schema
 
-### 3. **Blog Post Management API**
-- Build endpoints to create and read blog posts.
-- Store only essential data: title, content, and author.
+      ```json
+      {
+        "username": "username",
+        "password": "password"
+      }
+      ```
 
-**Possible Routes:**
-- `POST /api/posts`
-- `GET /api/posts`
-- `GET /api/posts/:id`
+- Blogs
 
-**Stretch Goal:** Add update and delete functionality for posts.
+  - `POST: /api/posts/:id`
 
-**Acceptance Criteria:**
-- Authenticated users can create and view blog posts.
+    - Retrieves the post of user extracted from JWT token with the id from params
 
----
+  - `POST: /api/posts/`
 
-### 4. **Comment Management API**
-- Implement an endpoint to add comments to blog posts.
-- Add functionality to view all comments for a specific blog post.
+    - Schema
 
-**Possible Routes:**
-- `POST /api/posts/:postId/comments`
-- `GET /api/posts/:postId/comments`
+    ```json
+    {
+      "title": "blog title",
+      "content": "blog content"
+    }
 
-**Acceptance Criteria:**
-- Users can add comments and view all comments for a blog post.
 
----
+    // User id retrieved from the passed JWT token
+    ```
 
-### 5. **Image Upload API**
-- Create an endpoint for a single image upload linked to a blog post.
-- Validate file types (e.g., allow only JPEG or PNG).
+  - `GET: /api/posts/`
+    - Retrieves all the post of user extracted from JWT token
 
-**Possible Routes:**
-- `POST /api/posts/:postId/images`
+- Image
 
-**Stretch Goal:** Add an endpoint to delete images.
+  - `POST: /api/posts/:postId/image`
 
-**Acceptance Criteria:**
-- Users can upload and associate an image with a blog post.
+    - Set the image for the post id retrieved from the params
+    - If there is already an image for the post it replace the
+      older image with new one
 
----
+  - `GET: /api/posts/:postId/image`
+    - Get the image for the post id specified in params
 
-### 6. **Authentication Middleware**
-- Implement a middleware to secure API routes using a simple token check.
+- User Profile
 
-**Stretch Goal:** Include role-based access control.
+  - `GET: /api/users/profile`
 
-**Acceptance Criteria:**
-- Protected routes are accessible only to authenticated users.
+    - Retrieves the user information for the user extracted from JWT token
 
----
-
-### 7. **Basic User Profile Management**
-- Allow users to view their profile information (e.g., username, email).
-- Implement an endpoint to update their profile information.
-
-**Possible Routes:**
-- `GET /api/users/profile`
-- `PATCH /api/users/profile`
-
-**Acceptance Criteria:**
-- Users can view and update their profile information.
-
----
-
-### 8. **Basic Error Handling**
-- Implement basic error handling for API endpoints to return appropriate HTTP status codes and messages.
-
-**Acceptance Criteria:**
-- Users receive meaningful error messages for invalid requests.
-
----
-
-### General:
-- Provide clear commit messages.
-- Write basic tests for the endpoints you develop.
-- Document API usage examples in a simple README file.
-- Follow coding best practices and maintain code readability.
-
-### Submission Guidelines
-
-After completing the assigned task, please follow these steps to submit your work for review:
-
-1. Ensure your GitHub repository is up-to-date and reflects the completed task.
-2. Go to the submission form: **[Task Submission Form](https://docs.google.com/forms/d/e/1FAIpQLSe0CE-mtbyHxWPVBG_vo8Ot-M3n9wEN_3vVFjdR9MEOJx42jA/viewform?usp=sharing)**.
-3. Fill out the form with the following details:
-   - Your full name and email address.
-   - The GitHub repository URL where your task is completed.
-   - Any additional comments, challenges faced, or suggestions (if applicable).
-
-Submissions will be reviewed promptly. Please ensure all required fields in the form are filled out accurately.
-
-Thank you for your effort and dedication!
+  - `PATCH: /api/users/profile`
+    - Update the user information for the user extracted from JWT token
+    - Schema is optional for all the field specified during registration
