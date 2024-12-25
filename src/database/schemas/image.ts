@@ -7,7 +7,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { BlogTable } from "./blog";
 
-export const ImageTable = pgTable("image", {
+export const ImageTable = pgTable("images", {
   id: uuid().primaryKey().defaultRandom(),
   filename: varchar({ length: 255 }).notNull(),
   size: decimal().notNull().$type<number>(),

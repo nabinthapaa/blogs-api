@@ -26,11 +26,9 @@ export async function getImage(
   res: Response,
 ) {
   const {
-    file,
     user,
     params: { postId },
   } = req;
-  if (!file) throw new BaseError();
   if (!user) throw new NotFoundError("User not found");
   const image = await ImageService.getImage(postId);
   return res.status(200).json({

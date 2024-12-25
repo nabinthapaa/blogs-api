@@ -14,7 +14,7 @@ export const postRelation = relations(BlogTable, ({ one, many }) => ({
     fields: [BlogTable.author],
     references: [UserTable.id],
   }),
-  comments: many(ImageTable),
+  comments: many(CommentTable),
   image: one(ImageTable, {
     fields: [BlogTable.id],
     references: [ImageTable.postId],
