@@ -5,6 +5,7 @@ import BlogRouter from "./blog";
 import CommentRouter from "./comment";
 import FileRouter from "./uploads";
 import ImageRouter from "./images";
+import UserRouter from "./users";
 
 const router = Router();
 
@@ -15,6 +16,7 @@ router.get("/health", (req, res) => {
 });
 
 router.use("/users", AuthRouter);
+router.use("/users", UserRouter);
 router.use("/posts", BlogRouter);
 router.use("/posts", CommentRouter);
 router.use("/posts", ImageRouter);
