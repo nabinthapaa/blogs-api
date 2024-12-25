@@ -1,6 +1,9 @@
 import { getImage, uploadImage } from "@/controller/image";
 import { authenticate } from "@/middlewares/authenticate";
-import { validateRequestParams } from "@/middlewares/validator";
+import {
+  validateImageFormat,
+  validateRequestParams,
+} from "@/middlewares/validator";
 import { asyncHandler } from "@/utils/asyncHandler";
 import { upload } from "@/utils/fileUpload";
 import { commentSchema } from "@/validationSchema/comment";
@@ -19,6 +22,7 @@ ImageRouter.post(
   "/:postId/image",
   authenticate,
   upload.single("image"),
+  asyncHandler(validateImageFormat(["image/jpeg", "image/png"])),
   validateRequestParams(commentSchema.pick({ postId: true })),
   asyncHandler(uploadImage),
 );
