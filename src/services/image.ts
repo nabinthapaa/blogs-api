@@ -23,16 +23,24 @@ export async function saveImage(
     await fs.rm(
       path.resolve(__dirname, "../../uploads/", existingFile.filename),
     );
-    return ImageModel.updateImage(postId, {
+    const updatedFile = await ImageModel.updateImage(postId, {
       filename: file.filename,
       size: file.size,
     });
+    return {
+      ...updatedFile,
+      url: "/api/uploads/" + updatedFile.filename,
+    };
   }
   await fs.rm(file.path);
-  return ImageModel.saveImage(postId, {
+  const newFile = await ImageModel.saveImage(postId, {
     filename: file.filename,
     size: file.size,
   });
+  return {
+    ...newFile,
+    url: "/api/uploads/" + newFile.filename,
+  };
 }
 
 export async function getImage(postId: string) {

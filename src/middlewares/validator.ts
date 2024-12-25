@@ -56,6 +56,7 @@ export function validateImageFormat(allowedMimeType: string[]) {
   ) {
     try {
       const file = req.file as FileMetadata;
+      console.log(file);
       if (!file) throw new NoFileError("Image is missing from data");
       if (!allowedMimeType.includes(file.mimetype)) {
         await fs.rm(file.path);

@@ -4,6 +4,6 @@ import { BaseError } from "./BaseError";
 export class NoFileError extends BaseError {
   constructor(message = "Malformed data") {
     super(message);
-    this.statusCode = StatusCodes.NO_CONTENT;
+    this.statusCode = StatusCodes.UNSUPPORTED_MEDIA_TYPE;
   }
 }
