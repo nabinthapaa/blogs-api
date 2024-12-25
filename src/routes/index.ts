@@ -9,7 +9,7 @@ import UserRouter from "./users";
 
 const router = Router();
 
-router.get("/health", (req, res) => {
+router.get("/health", (_req, res) => {
   res.status(StatusCodes.OK).json({
     message: "Api running",
   });
