@@ -40,7 +40,7 @@ export async function updatePost(
   }
 }
 
-export async function getPostById(id: string): Promise<IBlog> {
+export async function getPostById(id: string): Promise<IBlogDB> {
   return await BlogModel.getPostById(id);
 }
 

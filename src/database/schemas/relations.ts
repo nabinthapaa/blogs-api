@@ -2,10 +2,11 @@ import { relations } from "drizzle-orm";
 import { UserTable } from "./user";
 import { BlogTable } from "./blog";
 import { CommentTable } from "./comment";
+import { ImageTable } from "./image";
 
 export const userRelation = relations(UserTable, ({ many }) => ({
   post: many(BlogTable),
-  comments: many(CommentTable),
+  comment: many(CommentTable),
 }));
 
 export const postRelation = relations(BlogTable, ({ one, many }) => ({
@@ -13,7 +14,11 @@ export const postRelation = relations(BlogTable, ({ one, many }) => ({
     fields: [BlogTable.author],
     references: [UserTable.id],
   }),
-  comments: many(CommentTable),
+  comments: many(ImageTable),
+  image: one(ImageTable, {
+    fields: [BlogTable.id],
+    references: [ImageTable.postId],
+  }),
 }));
 
 export const commentsRelation = relations(CommentTable, ({ one }) => ({

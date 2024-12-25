@@ -1,4 +1,4 @@
-import { pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { UserTable } from "./user";
 import { BlogTable } from "./blog";
 
@@ -11,4 +11,6 @@ export const CommentTable = pgTable("comment", {
   postId: uuid("post_id")
     .references(() => BlogTable.id)
     .notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").$type<Date>(),
 });

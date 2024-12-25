@@ -1,6 +1,6 @@
 {
-  "id": "267f9317-3b88-42dc-8643-0db588fdee2d",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "4753cf30-b913-46e2-aa22-af1a64a8c1a3",
+  "prevId": "267f9317-3b88-42dc-8643-0db588fdee2d",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -153,8 +153,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.images": {
-      "name": "images",
+    "public.image": {
+      "name": "image",
       "schema": "",
       "columns": {
         "id": {
@@ -181,13 +181,26 @@
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "images_post_id_blogs_id_fk": {
-          "name": "images_post_id_blogs_id_fk",
-          "tableFrom": "images",
+        "image_post_id_blogs_id_fk": {
+          "name": "image_post_id_blogs_id_fk",
+          "tableFrom": "image",
           "tableTo": "blogs",
           "columnsFrom": [
             "post_id"

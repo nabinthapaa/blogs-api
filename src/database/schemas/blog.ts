@@ -9,6 +9,6 @@ export const BlogTable = pgTable("blogs", {
   author: uuid()
     .references(() => UserTable.id)
     .notNull(),
-  createdAt: timestamp().defaultNow().notNull(),
-  updatedAt: timestamp().$type<Date>(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").$type<Date>(),
 });

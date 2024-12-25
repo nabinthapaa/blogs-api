@@ -13,3 +13,14 @@ export interface IBlogDB extends IBlog {
   createdAt: Date;
   updatedAt: Date | null;
 }
+
+export interface FileMetadata {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  destination: string;
+  filename: string;
+  path: string;
+  size: number;
+}

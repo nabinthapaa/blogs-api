@@ -8,8 +8,8 @@
   "description": "",
   "scripts": {
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
-    "drizzle": "drizzle-kit --config ./src/drizzle.ts",
-    "studio": "drizzle-kit studio --config ./src/drizzle.ts",
+    "drizzle": "drizzle-kit --config=./src/drizzle.ts",
+    "studio": "npm run drizzle studio",
     "make:migrations": "npm run drizzle generate",
     "drop:migrations": "npm run drizzle drop",
     "migrate": "npm run drizzle migrate"
@@ -21,6 +21,7 @@
     "express": "^4.21.2",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.13.1",
     "postgres": "^3.4.5",
     "zod": "^3.24.1"
@@ -29,6 +30,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.7",
+    "@types/multer": "^1.4.12",
     "@types/node": "^22.10.2",
     "@types/pg": "^8.11.10",
     "drizzle-kit": "^0.30.1",
