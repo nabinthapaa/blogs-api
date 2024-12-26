@@ -11,8 +11,20 @@ export async function createUser(data: IUser) {
 }
 
 export async function updateUser(id: string, data: Partial<IUser>) {
-  const existingUserUsername = await UserModel.getUserById(id);
-  if (!existingUserUsername) throw new NotFoundError("User not found");
+  const existingUser = await UserModel.getUserById(id);
+  if (!existingUser) throw new NotFoundError("User not found");
+  if (data?.email) {
+    const existingUserEmail = await UserModel.getUserByEmail(data.email);
+    if (id !== existingUserEmail?.id && existingUserEmail)
+      throw new UserExistsError("Email already in use");
+  }
+  if (data?.username) {
+    const existingUserUsername = await UserModel.getUserByUsername(
+      data?.username,
+    );
+    if (existingUserUsername && id !== existingUserUsername?.id)
+      throw new UserExistsError("Username already taken");
+  }
   return await UserModel.updateUser(id, data);
 }
 
