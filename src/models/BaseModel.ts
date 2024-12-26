@@ -1,6 +1,6 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import config from "src/config";
+import config from "../config";
 
 const { host, port, user, password, name: database } = config.database;
 
