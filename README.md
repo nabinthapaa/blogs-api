@@ -17,6 +17,7 @@ This project is a api service for creating blogs
 - Switch to repository and run docker compose up
 - Server will be running at `http://localhost:4000/`
 - To check is server is running visit `http://localhost:4000/api/health`
+- To seed database `npm run seed`
 - Optional
   - If nvm is installed, run `nvm use` to switch node version
   - To check database(node version must be 23), run `npm run studio`, visit `http://local.drizzle.studio`

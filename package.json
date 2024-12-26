@@ -12,6 +12,7 @@
     "studio": "npm run drizzle studio",
     "make:migrations": "npm run drizzle generate",
     "drop:migrations": "npm run drizzle drop",
+    "seed": "ts-node -r tsconfig-paths/register ./src/database/seeds/index.ts",
     "migrate": "npm run drizzle migrate",
     "test": "npm run jest --verbose"
   },
