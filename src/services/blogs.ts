@@ -4,7 +4,7 @@ import { IBlog, IBlogDB } from "@/types/index";
 import { sluggify } from "@/utils/sluggify";
 
 export async function createPost(
-  data: IBlog,
+  data: Omit<IBlog, "author">,
   userId: string,
 ): Promise<IBlogDB> {
   const slug = sluggify(data.title);
@@ -21,7 +21,7 @@ export async function updatePost(
   userId: string,
 ): Promise<IBlog> {
   const post = await BlogModel.getPostById(id);
-  if (post.id !== userId) {
+  if (post.author !== userId) {
     throw new UnauthorizedError("Cannot edit post");
   }
 
