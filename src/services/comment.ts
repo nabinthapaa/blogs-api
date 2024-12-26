@@ -34,9 +34,9 @@ export async function getCommentById(id: string) {
 }
 
 export async function getCommentByPostId(postId: string) {
-  return await CommentModel.getCommentByPostId(postId);
+  return await CommentModel.getCommentsByPostId(postId);
 }
 
 export async function getCommentByUserId(userId: string) {
-  return await CommentModel.getCommentByUserId(userId);
+  return await CommentModel.getCommentsByUserId(userId);
 }

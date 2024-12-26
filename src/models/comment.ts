@@ -62,35 +62,27 @@ export class CommentModel extends BaseModel {
     );
   }
 
-  static async getCommentByPostId(postId: string) {
-    return (
-      (
-        await CommentModel.db()
-          .select({
-            id: CommentTable.id,
-            comment: CommentTable.comment,
-            postId: CommentTable.postId,
-            userId: CommentTable.userId,
-          })
-          .from(CommentTable)
-          .where(eq(CommentTable.postId, postId))
-      )?.[0] ?? null
-    );
+  static async getCommentsByPostId(postId: string) {
+    return await CommentModel.db()
+      .select({
+        id: CommentTable.id,
+        comment: CommentTable.comment,
+        postId: CommentTable.postId,
+        userId: CommentTable.userId,
+      })
+      .from(CommentTable)
+      .where(eq(CommentTable.postId, postId));
   }
 
-  static async getCommentByUserId(userId: string) {
-    return (
-      (
-        await CommentModel.db()
-          .select({
-            id: CommentTable.id,
-            comment: CommentTable.comment,
-            postId: CommentTable.postId,
-            userId: CommentTable.userId,
-          })
-          .from(CommentTable)
-          .where(eq(CommentTable.userId, userId))
-      )?.[0] ?? null
-    );
+  static async getCommentsByUserId(userId: string) {
+    return await CommentModel.db()
+      .select({
+        id: CommentTable.id,
+        comment: CommentTable.comment,
+        postId: CommentTable.postId,
+        userId: CommentTable.userId,
+      })
+      .from(CommentTable)
+      .where(eq(CommentTable.userId, userId));
   }
 }
