@@ -57,5 +57,5 @@ export async function getComments(
   if (!user) throw new NotFoundError("User not found");
   const updatedComment = await CommentService.getCommentByPostId(postId);
 
-  return res.status(StatusCodes.OK).json({ ...updatedComment });
+  return res.status(StatusCodes.OK).json(updatedComment);
 }

@@ -37,9 +37,7 @@ export async function getPosts(
   const { user } = req;
   if (!user) throw new UnauthorizedError();
   const post = await BlogService.getPosts(user.id);
-  return res.status(StatusCodes.OK).json({
-    ...post,
-  });
+  return res.status(StatusCodes.OK).json(post);
 }
 
 export async function getPostById(
@@ -59,7 +57,5 @@ export async function getPostByAuthor(
 ) {
   const { authorId } = req.params;
   const post = await BlogService.getPosts(authorId);
-  return res.status(StatusCodes.OK).json({
-    ...post,
-  });
+  return res.status(StatusCodes.OK).json(post);
 }
