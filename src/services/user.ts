@@ -1,5 +1,5 @@
 import { IUser } from "@/types/index";
-import { UserModel } from "src/models/user";
+import { UserModel } from "../models/user";
 import { NotFoundError, UserExistsError } from "../errors";
 
 export async function createUser(data: IUser) {

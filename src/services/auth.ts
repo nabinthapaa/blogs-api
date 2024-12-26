@@ -2,9 +2,9 @@ import { IUser } from "@/types/index";
 import { IAuthResponse } from "@/types/interface";
 import bcrypt from "bcryptjs";
 import { sign } from "jsonwebtoken";
-import config from "src/config";
-import { UserService } from ".";
+import config from "../config";
 import { NotFoundError, UserExistsError } from "../errors";
+import * as UserService from "./user";
 
 export async function login(
   data: Pick<IUser, "username" | "password">,

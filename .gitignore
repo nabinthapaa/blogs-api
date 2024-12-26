@@ -4,3 +4,4 @@ todo.md
 *.sh
 compose-*.*
 uploads/*.*
+coverage
