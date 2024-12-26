@@ -101,6 +101,52 @@ describe("User service => updateUser", () => {
     expect(UserModel.updateUser).not.toHaveBeenCalled();
   });
 
+  it("Should throw user exists error when updating email, if email already exists and is other user's email", async () => {
+    (UserModel.getUserById as jest.Mock).mockResolvedValue(mockUser);
+    (UserModel.getUserByEmail as jest.Mock).mockResolvedValue({
+      ...mockUser,
+      id: "another",
+    });
+    await expect(
+      UserService.updateUser(mockUser.id, {
+        password: "updatedPassword",
+        email: mockUser.email,
+      }),
+    ).rejects.toThrow(UserExistsError);
+
+    expect(UserModel.getUserById).toHaveBeenCalledWith(mockUser.id);
+    expect(UserModel.getUserById).toHaveBeenCalledTimes(1);
+
+    expect(UserModel.getUserByEmail).toHaveBeenCalledWith(mockUser.email);
+    expect(UserModel.getUserByEmail).toHaveBeenCalledTimes(1);
+
+    expect(UserModel.getUserByUsername).not.toHaveBeenCalled();
+    expect(UserModel.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("Should throw user exists error when updating username, if username already exists and is other user's username", async () => {
+    (UserModel.getUserById as jest.Mock).mockResolvedValue(mockUser);
+    (UserModel.getUserByUsername as jest.Mock).mockResolvedValue({
+      ...mockUser,
+      id: "another",
+    });
+    await expect(
+      UserService.updateUser(mockUser.id, {
+        password: "updatedPassword",
+        username: mockUser.username,
+      }),
+    ).rejects.toThrow(UserExistsError);
+
+    expect(UserModel.getUserById).toHaveBeenCalledWith(mockUser.id);
+    expect(UserModel.getUserById).toHaveBeenCalledTimes(1);
+
+    expect(UserModel.getUserByUsername).toHaveBeenCalledWith(mockUser.username);
+    expect(UserModel.getUserByUsername).toHaveBeenCalledTimes(1);
+
+    expect(UserModel.getUserByEmail).not.toHaveBeenCalled();
+    expect(UserModel.updateUser).not.toHaveBeenCalled();
+  });
+
   it("Should update user when found", async () => {
     (UserModel.getUserById as jest.Mock).mockResolvedValue(mockUser);
     (UserModel.updateUser as jest.Mock).mockResolvedValue({
