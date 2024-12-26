@@ -13,7 +13,7 @@
     "make:migrations": "npm run drizzle generate",
     "drop:migrations": "npm run drizzle drop",
     "migrate": "npm run drizzle migrate",
-    "test": "npm run jest"
+    "test": "npm run jest --verbose"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -110,3 +110,8 @@ This project is a api service for creating blogs
   - `PATCH: /api/users/profile`
     - Update the user information for the user extracted from JWT token
     - Schema is optional for all the field specified during registration
+
+## Tests
+
+- Run test using command
+  `npm run test`
